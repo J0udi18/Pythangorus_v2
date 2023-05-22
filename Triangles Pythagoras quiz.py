@@ -2,8 +2,42 @@ import random
 
 score = 0
 
+
+# displays instructions
+def instructions():
+    print("Instructions")
+    print('''
+- All the questions area about Pythagoras
+- answer all of the questions  if you dont know guess
+- answer should be without a decimal
+       ''')
+    return ""
+
+
+# Main Routine goes here...
+def yes_no(question):
+    while True:
+        response = input(question).lower()
+
+        if response == "yes" or response == "y" or response == "pythagoras":
+            return "yes"
+
+        elif response == "no" or response == "n":
+            return "no"
+
+        else:
+            print("please answer yes / no")
+
+
+do_you_know_what_is_the_quiz_about = yes_no("do you know what is the quiz about? ")
+
+if do_you_know_what_is_the_quiz_about == "no":
+    instructions()
+
+print("let start")
+
 print("Welcome to the Pythagoras Quiz!")
-print("You will be given a right triangle and you need to find "
+print("You will be given a questions about right triangle and you need to find "
       "the length of the missing side.")
 
 while True:
