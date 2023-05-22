@@ -11,6 +11,15 @@ def instructions():
 - answer all of the questions  if you dont know guess
 - answer should be without a decimal
        ''')
+    print("The rules of the quiz go here")
+    print(''''' 
+-- There are 10 multiple-choice questions in total.
+-- Each question has four options and only one option is correct.
+-- You will get one point for every correct answer.
+-- If you get a score of 6 or higher, you have done it!
+    ''''')
+    print("Good luck and have fun!")
+
     return ""
 
 

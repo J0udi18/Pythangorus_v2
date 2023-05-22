@@ -19,7 +19,7 @@ def yes_no(question):
 def instructions():
     print("**** How to play ****")
     print()
-    print("The rules of the game go here")
+    print("The rules of the quiz go here")
     print()
     return ""
 
@@ -29,6 +29,6 @@ played_before = yes_no("Have you played the "
                        "game before? ")
 
 if played_before == "no":
-    instructions = print("display")
+    print("display")
 
 print("program continues")
