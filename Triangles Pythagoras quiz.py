@@ -1,5 +1,26 @@
 import random
 
+
+# Class for coloured text, used for error generator
+# (and other text colouring functions)
+class Color_It():
+
+    def __init__(self, red, green, blue, text):
+        self.red = red
+        self.green = green
+        self.blue = blue
+        self.text = text
+
+    def get_color_escape(self, red, green, blue):
+        return '\033[{};2;{};{};{}m'.format(38, red, green, blue)
+
+    def print_colour(self):
+        # the bit at the end resets the colour back to normal
+        all_coloured = self.get_color_escape(self.red, self.green,
+                                             self.blue) + self.text + '\033[0;0m'
+        return all_coloured
+
+
 score = 0
 
 
@@ -11,13 +32,6 @@ def instructions():
 - answer all of the questions  if you don't know guess
 - answer should be provided decimal points.
        ''')
-    print("The rules of the quiz go here")
-    print(''''' 
--- There are 10 multiple-choice questions in total.
--- Each question has four options and only one option is correct.
--- You will get one point for every correct answer.
--- If you score 6 or higher, you have done it!
-    ''''')
     print("Good luck and have fun!")
 
     return ""
@@ -38,16 +52,18 @@ def yes_no(question):
             print("please answer yes / no")
 
 
+# Function to generate and run the quiz
+def run_quiz():
+    print("Welcome to the Pythagoras Quiz!")
+    print("you will be given question about right triangles, and you need to find"
+          "the length of the missing side.")
+    print("let's start")
+
+
 do_you_know_what_is_the_quiz_about = yes_no("do you know what is the quiz about? ")
 
 if do_you_know_what_is_the_quiz_about == "no":
     instructions()
-
-print("let start")
-
-print("Welcome to the Pythagoras Quiz!")
-print("You will be given a questions about right triangle and you need to find "
-      "the length of the missing side.")
 
 while True:
     a = random.randint(1, 10)
@@ -66,7 +82,7 @@ while True:
         break
 
     try:
-        answer = float(answer)
+        answer = int(answer)
         if answer == c:
             print("Correct!")
             score += 1
