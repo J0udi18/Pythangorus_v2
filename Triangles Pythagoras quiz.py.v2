@@ -30,11 +30,26 @@ def yes_no(question):
             print("please answer yes / no")
 
 
+# Game set up goes here
 want_instructions = yes_no("Would you like to read/see the instructions? ")
 
-if want_instructions == "no":
+if want_instructions == "yes":
     instructions()
 
+all_swag = "🎈✨👓🏆🧸🍕🍔🍟🥨🍦🧁🍫🍬🍩🍭🍪🍧🍿🍣🍀🍒🌈🦋"
+swag_list = []
+
+for item in all_swag:
+    swag_list.append(item)
+
+problems_solved = 0
+problem_attempts = []
+quiz_history = []
+swag_earned = []
+
+for item in range(0, 5):
+    get_swag = random.choice(swag_list)
+    print(get_swag)
 
 # Questions start here...
 
