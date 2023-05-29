@@ -6,6 +6,7 @@ score = 0
 # displays instructions
 def instructions():
     print("Instructions")
+    print("\033[2;32;31m Hello \n")
     print("Welcome to the Pythagoras Quiz!")
     print("you will be given question about right triangles, and you need to find"
           "the length of the missing side.")
@@ -32,7 +33,7 @@ def yes_no(question):
 
 want_instructions = yes_no("Would you like to read/see the instructions? ")
 
-if want_instructions == "no":
+if want_instructions == "yes":
     instructions()
 
 
