@@ -1,7 +1,7 @@
 from math import sqrt
 
 def getLength() :
-    length = float(input("please enter length of Traiangle side"))
+    length = float(input("please enter length of Triangle side"))
     return length
 
 side1 = getLength ()
