@@ -59,6 +59,7 @@ while True:
     try:
         answer = int(answer)
         if answer == c:
+            print("\033[0;208;130m correct")
             print("Correct!")
             score += 1
         else:
