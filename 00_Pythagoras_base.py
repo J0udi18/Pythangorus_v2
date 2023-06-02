@@ -313,4 +313,6 @@ while play_again == "yes":
     else:
         play_again = "no"
 
-    print("\033[2;32;40m thx for doing the quiz  \n")
+print("\033[255;20;147m \n")
+print("\033[255;20;147m Thanks for doing the quiz  \n")
+255-20-147
