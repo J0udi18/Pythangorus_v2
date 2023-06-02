@@ -1,0 +1,4 @@
+pythagorean triples
+how can i generate pythagorean triples:
+# This is a formulas for generating Pythagorean trples
+https://en.wikipedia.org/wiki/Formulas_for_generating_Pythagorean_triples

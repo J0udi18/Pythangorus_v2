@@ -18,8 +18,8 @@ class Color_It:
 
 
 # Main Routine goes here...
-error_1 = Color_It(255, 100, 100, "Oops, you messed up")
-message_2 = Color_It(0, 255, 255, "This is another message")
+error_1 = Color_It(255, 100, 100, "Oops, incorrect")
+message_2 = Color_It(255, 20, 147, "Thank for doing the quiz")
 
 print(error_1.print_colour())
 print(message_2.print_colour())
