@@ -62,6 +62,7 @@ while True:
             print("Correct!")
             score += 1
         else:
+            print("\033[1;31;40m incorrect")
             print(f"Incorrect. The correct answer is {c} cm.")
         print("Your score is", score, "out of 10.")
 

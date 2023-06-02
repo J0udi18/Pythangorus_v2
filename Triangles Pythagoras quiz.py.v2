@@ -3,18 +3,6 @@ import random
 score = 0
 
 
-# displays instructions
-def instructions():
-    print("Instructions")
-    print("Welcome to the Pythagoras Quiz!")
-    print("you will be given question about right triangles, and you need to find"
-          "the length of the missing side.")
-    print("let's start")
-    print("Good luck and have fun!")
-
-    return ""
-
-
 # Main Routine goes here...
 def yes_no(question):
     while True:
@@ -32,6 +20,19 @@ def yes_no(question):
 
 # Game set up goes here
 want_instructions = yes_no("Would you like to read/see the instructions? ")
+
+
+# displays instructions
+def instructions():
+    print("Instructions")
+    print("Welcome to the Pythagoras Quiz!")
+    print("you will be given question about right triangles, and you need to find"
+          "the length of the missing side.")
+    print("let's start")
+    print("Good luck and have fun!")
+
+    return ""
+
 
 if want_instructions == "yes":
     instructions()
