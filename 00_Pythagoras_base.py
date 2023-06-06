@@ -1,27 +1,9 @@
 import random
 import time
+from unittest import result
 
 
 # Functions go here
-
-# Checks which questions user would like to answer
-def question_checker(question):
-    valid = False
-    while not valid:
-
-        response = input(question).lower()
-        # set list  of the type of questions
-        ques_type_list = ["a", "s", "m", "d", ""]
-
-        # Checks how long word is
-        if response not in ques_type_list:
-            print("<error> please first letter of math question eg: a for addition\n"
-                  "OR press <enter> for all types of questions")
-            print()
-            continue
-        else:
-            return response
-
 
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code=None, low=None, high=None):
@@ -123,18 +105,12 @@ def question(symbol, points_val):
 # Function will print instructions when called
 def instructions():
     statement_generator("Instructions", "|", "-")
-    print("There are 5 modes you can choose:")
-    print()
-    print("- Addition, a: 10 points for being correct")
-    print("- Subtraction, s: 25 points for being correct")
-    print("- Multiplication, m: 50 points for being correct")
-    print("- Division, d: 50 points for being correct")
-    print("- All, '': 50 points for being correct")
-    print()
-    print("Try to answer as many questions as possible.")
-    print("You can have a timer and see if you can do ")
-    print("all the questions in the set time. Every")
-    print("incorrect question removes 10 points.")
+    print("\033[1;33;40m Hell00000000 \n")
+    print("Welcome to the Pythagoras Quiz!")
+    print("you will be given question about right triangles, and you need to find"
+          "the length of the missing side.")
+    print("let's start")
+    print("Good luck and have fun!")
     return ""
 
 
@@ -168,19 +144,17 @@ questions_answered = 0
 correct_questions = 0
 incorrect_questions = 0
 points = 0
-questions_list = []
 
 # Main routine
-print("\033[1;33;40m welcome \n")
+print("\033[1;33;40m \n")
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
-
 
 # define the saved points
 save_points = 0
 
 # Asks if user has played before
 # If no print instructions
-played_before = yes_no("Have you played before? ")
+played_before = yes_no("did you know about this quiz before? ")
 if played_before == "no":
     instructions()
 print()
@@ -195,13 +169,6 @@ while play_again == "yes":
     correct_questions = 0
     incorrect_questions = 0
     points = 0
-    questions_list = []
-
-    # Symbol list
-    symbol_list = ["+", "-", "*", "/"]
-
-    # Ask user for which type of questions they would like
-    question_type = question_checker("Which type of questions would you like? (a, s, m, d, '') ")
 
     # Ask user for number of questions
     num_questions_error = "<error> enter an integer"
@@ -225,23 +192,6 @@ while play_again == "yes":
     # Generate questions
     while time.time() - start < seconds and num_questions > 0:
 
-        # generates questions depending on what type you choose
-        if question_type == "a":
-            result = question("+", 10)
-            num_points = 10
-        elif question_type == "s":
-            result = question("-", 25)
-            num_points = 25
-        elif question_type == "m":
-            result = question("x", 50)
-            num_points = 50
-        elif question_type == "d":
-            result = question("/", 50)
-            num_points = 50
-        else:
-            result = question(random.choice(symbol_list), 50)
-            num_points = 50
-
         # Add number of correct and incorrect questions
         if result == "correct":
             correct_questions += 1
@@ -255,9 +205,6 @@ while play_again == "yes":
 
         # Add number of questions answered
         questions_answered += 1
-
-        # Add question result to a list
-        questions_list.append("Question #{}: {}".format(questions_answered, result))
 
         # number of questions left go down
         num_questions -= 1
@@ -315,4 +262,4 @@ while play_again == "yes":
 
 print("\033[255;20;147m \n")
 print("\033[255;20;147m Thanks for doing the quiz  \n")
-255-20-147
+255 - 20 - 147
