@@ -67,7 +67,7 @@ def question(symbol, points_val):
     while not valid:
 
         # Question error if they input unexpected values
-        q_error = "Please enter an integer between 0 - 1000 (dont be dumb)"
+        q_error = "Please enter an integer between 0 - 1000 (dont be stupid)"
 
         # Generate random integer
         temp_int = random.randint(1, 10)
@@ -105,7 +105,6 @@ def question(symbol, points_val):
 # Function will print instructions when called
 def instructions():
     statement_generator("Instructions", "|", "-")
-    print("\033[1;33;40m Hell00000000 \n")
     print("Welcome to the Pythagoras Quiz!")
     print("you will be given question about right triangles, and you need to find"
           "the length of the missing side.")
@@ -234,31 +233,31 @@ while play_again == "yes":
     print()
 
     # Asks user if they want to see there history
-    show_history = yes_no("would you like to see game history? ")
+    show_history = yes_no("would you like to see quiz history? ")
 
     # displays history if user says yes
     if show_history == "yes":
         print()
         statement_generator("Quiz History", "-", "*")
-        for quiz in questions_list:
+        for quiz in question:
             print(quiz)
 
         print()
-        statement_generator("Thanks for playing", "!", "=")
+        statement_generator("Thanks for doing the quiz", "!", "=")
 
     # Doesn't display history if user says no
     elif show_history == "no":
         print()
-        statement_generator("Thanks for playing", "!", "=")
+        statement_generator("Thank you for doing the quiz", "!", "=")
 
     # Ask user if they want to play again
     print()
-    play_again = yes_no("Would you like to play again? ")
-    if play_again == "yes":
+    redo = yes_no("Would you like to play again? ")
+    if redo == "yes":
         print()
         continue
     else:
-        play_again = "no"
+        redo = "no"
 
 print("\033[255;20;147m \n")
 print("\033[255;20;147m Thanks for doing the quiz  \n")
