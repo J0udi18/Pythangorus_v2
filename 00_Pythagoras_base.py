@@ -13,7 +13,7 @@ def instructions():
     print("you will be given question about right triangles, and you need to find"
           "the length of the missing side.")
     print("let's start")
-    print("Good luck and have fun!")
+    print("Good luck!")
     return ""
 
 # Number checker to make sure user inputs correctly
