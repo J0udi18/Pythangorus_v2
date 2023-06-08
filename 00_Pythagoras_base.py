@@ -5,6 +5,17 @@ from unittest import result
 
 # Functions go here
 
+
+# Function will print instructions when called
+def instructions():
+    statement_generator("Instructions", "|", "-")
+    print("Welcome to the Pythagoras Quiz!")
+    print("you will be given question about right triangles, and you need to find"
+          "the length of the missing side.")
+    print("let's start")
+    print("Good luck and have fun!")
+    return ""
+
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code=None, low=None, high=None):
     valid = False
@@ -100,17 +111,6 @@ def question(symbol, points_val):
             result = "quit"
             print()
             return result
-
-
-# Function will print instructions when called
-def instructions():
-    statement_generator("Instructions", "|", "-")
-    print("Welcome to the Pythagoras Quiz!")
-    print("you will be given question about right triangles, and you need to find"
-          "the length of the missing side.")
-    print("let's start")
-    print("Good luck and have fun!")
-    return ""
 
 
 # Gives statements decoration on sides and top
