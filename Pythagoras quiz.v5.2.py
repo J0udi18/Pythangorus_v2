@@ -2,6 +2,53 @@ import random
 import time
 from termcolor import colored
 
+
+def instructions():
+    print(colored("Welcome to the Pythagorean Theorem Quiz!", "blue"))
+    print("Instructions: In each round, a random right triangle will be generated.")
+    print("You need to input the length of the hypotenuse (c).")
+    print("After each answer, feedback will be provided on whether your answer was correct or not.")
+    print()
+
+# Timer function stalls program and counts down
+def timer(t):
+    time_set = yes_no("Would you like a timer? ")
+    if time_set == "yes":
+        time_limit = int(input("Enter the time limit (in seconds) per question: "))
+    else:
+        time_limit = float("inf")  # Set an infinite time limit
+
+
+# checks how many round had the player played
+def check_rounds(round_error=None):
+    while True:
+        response = input("How many rounds: ")
+
+        rounds_error = "please type either <enter> or an " \
+                       "integer that is more than 0\n"
+
+        # If infinite mode not chosen, check response
+        # is an integer that is more than 0
+        if response != "":
+            try:
+                response = int(response)
+
+                # If response is too low, go back to
+                # start of loop
+                if response < 1:
+                    print(rounds_error)
+                    continue
+
+              except ValueError:
+                print(round_error)
+                continue
+            return response
+
+
+            # If response is not an integer go back to
+            # start of loop
+
+
 def generate_question():
     a = random.randint(1, 10)
     b = random.randint(1, 10)
@@ -11,6 +58,7 @@ def generate_question():
     answer = str(c)
     return question, answer
 
+
 def print_feedback(correct):
     if correct:
         feedback = colored("Correct!", "green")
@@ -18,54 +66,40 @@ def print_feedback(correct):
         feedback = colored("Incorrect.", "red")
     print(feedback)
 
-def yes_no(prompt):
-    while True:
-        answer = input(prompt + " (yes/no) ").lower()
-        if answer in ["yes", "no"]:
-            return answer
-        print("Please enter either 'yes' or 'no'.")
 
-def main():
-    print(colored("Welcome to the Pythagorean Theorem Quiz!", "blue"))
-    print("Instructions: In each round, a random right triangle will be generated.")
-    print("You need to input the length of the hypotenuse (c).")
-    print("After each answer, feedback will be provided on whether your answer was correct or not.")
-    print()
+def yes_no(question, error, num_type, exit_code=None, low=None, high=None):
+    valid = False
+    while not valid:
+        try:
+            # Checks if user inputs exit code
+            response = input(question)
+            if response == exit_code:
+                return response
+            else:
+                response = num_type(response)
 
-    rounds = int(input("How many rounds would you like to play? "))
+            # Checks if they inputted correct number
+            if low is not None and high is not None:
+                if low < response < high:
+                    return response
+                else:
+                    print(error)
+                    print()
+                    continue
 
-    time_set = yes_no("Would you like a timer? ")
-    if time_set == "yes":
-        time_limit = int(input("Enter the time limit (in seconds) per question: "))
-    else:
-        time_limit = float("inf")  # Set an infinite time limit
+            elif low is not None:
+                if response > low:
+                    return response
+                else:
+                    print(error)
+                    print()
+                    continue
 
-    correct_answers = 0
+            else:
+                return response
 
-    for _ in range(rounds):
-        question, answer = generate_question()
-        print(question)
+        except ValueError:
+            print(error)
+            print()
 
-        start_time = time.time()
-        user_answer = input("Your answer: ")
-        end_time = time.time()
-
-        elapsed_time = end_time - start_time
-        if elapsed_time > time_limit:
-            print(colored(f"Time limit exceeded! You took {elapsed_time:.2f} seconds.", "yellow"))
-            continue
-
-        if user_answer == answer:
-            correct_answers += 1
-            print_feedback(True)
-        else:
-            print_feedback(False)
-
-    print(f"\nYou scored {correct_answers} out of {rounds} in the Pythagorean Theorem Quiz.")
-
-    play_again = input("Do you want to take the quiz again? (yes/no) ")
-    if play_again.lower() == "yes":
-        print(f"\nYour score in the previous quiz was {correct_answers}/{rounds}.")
-        main()
-    else:
         print("Thank you for taking the Pythagorean Theorem Quiz!")

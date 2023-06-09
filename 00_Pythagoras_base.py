@@ -16,6 +16,7 @@ def instructions():
     print("Good luck!")
     return ""
 
+
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code=None, low=None, high=None):
     valid = False

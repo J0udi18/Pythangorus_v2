@@ -1,6 +1,7 @@
 import random
 import time
 
+
 def generate_question():
     a = random.randint(1, 10)
     b = random.randint(1, 10)
@@ -10,6 +11,7 @@ def generate_question():
     answer = str(c)
     return question, answer
 
+
 def print_feedback(correct):
     if correct:
         feedback = "Correct!"
@@ -17,12 +19,14 @@ def print_feedback(correct):
         feedback = "Incorrect."
     print(feedback)
 
+
 def yes_no(prompt):
     while True:
         answer = input(prompt + " (yes/no) ").lower()
         if answer in ["yes", "no"]:
             return answer
         print("Please enter either 'yes' or 'no'.")
+
 
 def main():
     print("Welcome to the Pythagorean Theorem Quiz!")
