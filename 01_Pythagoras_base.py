@@ -108,6 +108,7 @@ def question(points_val):
             print()
             return result
         else:
+            print("\033[1;31;40m \n")
             statement_generator("You got it wrong. -10 points", "|", "-")
             result = "incorrect"
             print()
@@ -116,6 +117,7 @@ def question(points_val):
 
 # Function will print instructions when called
 def instructions():
+    print("\033[1;33;40m \n")
     statement_generator("Instructions", "|", "-")
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
@@ -149,6 +151,7 @@ while play_again == "yes":
     # Call the question function based on the selected type
     if question_type == "p" or question_type == "":
         result = question(10)
+        print("\033[1;32;40m \n")
         if result == "correct":
             points += 10
         else:
@@ -157,4 +160,5 @@ while play_again == "yes":
     play_again = yes_no("Do you want to play again? (yes/no): ")
 
 print("Your final score is:", points)
+print("\033[1;35;40m \n")
 print("Thank you for playing the Pythagoras Quiz!")
