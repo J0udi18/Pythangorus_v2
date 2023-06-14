@@ -103,7 +103,7 @@ def question(symbol, points_val):
             print()
             return result
         elif response != ans:
-            statement_generator("You got it wrong. -10 points", "|", "-")
+            statement_generator("You got it wrong. -10 points", "|", "-") 
             result = "incorrect"
             print()
             return result

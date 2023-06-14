@@ -24,7 +24,7 @@ def question_checker(question):
 
 
 # Number checker to make sure user inputs correctly
-def num_check(question, error, num_type, exit_code=None, low=None, high=None):
+def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
     valid = False
     while not valid:
         try:
@@ -144,13 +144,17 @@ def colored_question(question):
 instructions()
 
 points = 0
-play_again = "yes"
+another_question = "yes"
 
-while play_again == "yes":
+while another_question == "yes":
 
     # Select question type
     colored_question("Enter 'p' to generate a Pythagorean triple or press <enter> for all types of questions: ")
     question_type = question_checker("")
+
+     # ask uesr for number of questions
+    num_questions_error = "<error> enter an interger"
+    num_questions = num_check("How many questions? ", num_questions_error, int, None, 0)
 
     # Call the question function based on the selected type
     if question_type == "p" or question_type == "":
@@ -161,8 +165,19 @@ while play_again == "yes":
         else:
             points -= 10
 
-    play_again = yes_no("Do you want to play again? (yes/no): ")
+    another_question = yes_no("Do you want to have another question? (yes/no): ")
+
+# Ask user if they want to see there history
+show_history = yes_no("would you like to see the quiz history?")
+
+# display history if user syays yes
+if show_history == "yes":
+    print()
+    statement_generator("Quiz History", "-", "*")
+    for quiz in question_type:
+        print(quiz)
+
 
 print("Your final score is:", points)
 print("\033[1;35;40m \n")
-print("Thank you for playing the Pythagoras Quiz!")
+print("Thank you for doing the Pythagoras Quiz!")
