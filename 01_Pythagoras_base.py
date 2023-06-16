@@ -140,9 +140,9 @@ def statement_generator(statement, deco_line, deco_char):
 instructions()
 
 points = 0
-play_again = "yes"
+another_question = "yes"
 
-while play_again == "yes":
+while another_question == "yes":
 
     # Select question type
     question_type = question_checker("Enter 'p' to generate a Pythagorean triple or press <enter> for all types of "
@@ -157,8 +157,8 @@ while play_again == "yes":
         else:
             points -= 10
 
-    play_again = yes_no("Do you want to play again? (yes/no): ")
+    another_question = yes_no("Do you want another question? (yes/no): ")
 
 print("Your final score is:", points)
 print("\033[1;35;40m \n")
-print("Thank you for playing the Pythagoras Quiz!")
+print("Thank you for doing the Pythagoras Quiz!")
