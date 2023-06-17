@@ -26,7 +26,7 @@ def display_score(score):
     print(f"Your score is {score} out of 10.")
 
 # Define a function to play the Pythagoras Quiz
-def play_quiz():
+def do_quiz():
     # Display instructions for the quiz
     print("Welcome to the Pythagoras Quiz! 😃")
     print("You will be asked 10 questions about the Pythagorean theorem.")
@@ -42,9 +42,9 @@ def play_quiz():
     # Display the student's score
     display_score(score)
 
-# Use a while loop to allow the user to play the Pythagoras Quiz multiple times
-play_again = "yes"
-while play_again.lower() == "yes":
-    play_quiz()
-    play_again = input("Do you want to play again? (yes/no): ")
-print("Thanks for playing the Pythagoras Quiz!")
+# Use a while loop to allow the user to do the Pythagoras Quiz multiple times
+another_question = "yes"
+while another_question.lower() == "yes":
+    do_quiz()
+    another_queston = input("Do you want another question? (yes/no): ")
+print("Thanks for doing the Pythagoras Quiz!")
