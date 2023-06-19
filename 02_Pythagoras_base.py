@@ -14,6 +14,29 @@ def instructions():
     print("Each incorrect answer will deduct 10 points.")
     print("Let's get started!")
 
+    return ""
+
+# Checks for yes or no responses
+def yes_no(question):
+    valid = False
+    while not valid:
+        response = input(question).lower()
+
+        if response == "yes" or response == "y":
+            response = "yes"
+            return response
+
+        elif response == "no" or response == "n":
+            response = "no"
+            return response
+
+        else:
+            print("<error> Please say yes or no")
+            print()
+
+want_instructions = yes_no("would you like to read/see the instructions? ")
+if want_instructions == "yes":
+   instructions()
 
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
@@ -49,25 +72,6 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
 
         except ValueError:
             print(error)
-            print()
-
-
-# Checks for yes or no responses
-def yes_no(question):
-    valid = False
-    while not valid:
-        response = input(question).lower()
-
-        if response == "yes" or response == "y":
-            response = "yes"
-            return response
-
-        elif response == "no" or response == "n":
-            response = "no"
-            return response
-
-        else:
-            print("<error> Please say yes or no")
             print()
 
 
@@ -152,11 +156,13 @@ def statement_generator(statement, deco_line, deco_char):
 # Function to generate a formatted colored question
 def colored_question(question):
     print("\033[1;34m" + question + "\033[0m")
-    
-# Main code
-instructions()
 
-print("Welcome to the Quiz!")
+
+# Main code
+
+statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
+print("\033[103;33;60m Hello \n")
+
 points = 0
 another_question = "yes"
 
