@@ -2,6 +2,7 @@ import random
 import time
 from termcolor import colored
 
+
 def instructions():
     print(colored("Welcome to the Pythagorean Theorem Quiz!", "blue"))
     print("Instructions: In each round, a random right triangle will be generated.")
@@ -9,12 +10,14 @@ def instructions():
     print("After each answer, feedback will be provided on whether your answer was correct or not.")
     print()
 
+
 def timer(t):
     time_set = yes_no("Would you like a timer? ")
     if time_set == "yes":
         time_limit = int(input("Enter the time limit (in seconds) per question: "))
     else:
         time_limit = float("inf")  # Set an infinite time limit
+
 
 def check_rounds(round_error=None):
     while True:
@@ -35,6 +38,7 @@ def check_rounds(round_error=None):
                 continue
             return response
 
+
 def generate_question():
     a = random.randint(1, 10)
     b = random.randint(1, 10)
@@ -44,12 +48,14 @@ def generate_question():
     answer = str(c)
     return question, answer
 
+
 def print_feedback(correct):
     if correct:
         feedback = colored("Correct!", "green")
     else:
         feedback = colored("Incorrect.", "red")
     print(feedback)
+
 
 def yes_no(question, error, num_type, exit_code=None, low=None, high=None):
     valid = False

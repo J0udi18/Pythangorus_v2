@@ -1,5 +1,6 @@
 import random
 
+
 # Functions go here
 
 # Checks which questions user would like to answer
@@ -7,9 +8,11 @@ def question_checker(question):
     valid_responses = ["p", "m", "s", ""]
     response = input(question).lower()
     while response not in valid_responses:
-        print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
+        print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, "
+              "'s' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
         response = input(question).lower()
     return response
+
 
 # Generate a Pythagorean triple question
 def generate_pythagorean_question():
@@ -21,15 +24,17 @@ def generate_pythagorean_question():
     b = n * (2 * n + 1) + n
 
     # Get user's answer
-    response = int(input(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? "))
+    response = int(input(
+        f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? "))
 
     # Check user's answer
-    if response == a**2 + b**2:
+    if response == a ** 2 + b ** 2:
         print("You got it right! +10 points")
         return 10
     else:
         print("You got it wrong. -10 points")
         return -10
+
 
 # Generate a Multiplication Challenge question
 def generate_multiplication_question():
@@ -47,6 +52,7 @@ def generate_multiplication_question():
     else:
         print("You got it wrong. -5 points")
         return -5
+
 
 # Generate a Square Numbers Challenge question
 def generate_square_number_question():
@@ -67,6 +73,7 @@ def generate_square_number_question():
         print("You got it wrong. -5 points")
         return -5
 
+
 # Main code
 
 print("Welcome to the Quiz!")
@@ -75,7 +82,8 @@ another_question = "yes"
 
 while another_question == "yes":
     # Select question type
-    question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions: ")
+    question_type = question_checker(
+        "Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions: ")
 
     # Call the respective question function based on the selected type
     if question_type == "p":
