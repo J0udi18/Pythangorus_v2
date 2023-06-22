@@ -1,8 +1,6 @@
 import random
 
 
-# Functions go here
-
 # Function will print instructions when called
 def instructions():
     print("\033[1;33;40m \n")
@@ -14,45 +12,31 @@ def instructions():
     print("Each incorrect answer will deduct 10 points.")
     print("Let's get started!")
 
-    return ""
 
 # Checks for yes or no responses
 def yes_no(question):
-    valid = False
-    while not valid:
+    valid_responses = ["yes", "no", "y", "n"]
+    while True:
         response = input(question).lower()
-
-        if response == "yes" or response == "y":
-            response = "yes"
+        if response in valid_responses:
             return response
-
-        elif response == "no" or response == "n":
-            response = "no"
-            return response
-
         else:
             print("<error> Please say yes or no")
             print()
 
-want_instructions = yes_no("would you like to read/see the instructions? ")
-if want_instructions == "yes":
-   instructions()
 
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
-    valid = False
-    while not valid:
+    while True:
         try:
-            # Checks if user inputs exit code
             response = input(question)
             if response == exit_code:
                 return response
             else:
                 response = num_type(response)
 
-            # Checks if they inputted correct number
             if low is not None and high is not None:
-                if low < response < high:
+                if low <= response <= high:
                     return response
                 else:
                     print(error)
@@ -60,7 +44,7 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
                     continue
 
             elif low is not None:
-                if response > low:
+                if response >= low:
                     return response
                 else:
                     print(error)
@@ -78,26 +62,21 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
 # Checks which questions user would like to answer
 def question_checker(question):
     valid_responses = ["p", "m", "s", ""]
-    response = input(question).lower()
-    while response not in valid_responses:
-        print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
+    while True:
         response = input(question).lower()
-    return response
+        if response in valid_responses:
+            return response
+        else:
+            print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
 
 
 # Generate a Pythagorean triple question
 def generate_pythagorean_question():
-    # Generate random integer for n
     n = random.randint(1, 10)
-
-    # Calculate the values of a and b based on n
     a = 2 * n + 1
     b = n * (2 * n + 1) + n
-
-    # Get user's answer
-    response = int(input(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? "))
-
-    # Check user's answer
+    response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? ",
+                         "<error> Please enter a valid number.", int)
     if response == a**2 + b**2:
         print("You got it right! +10 points")
         return 10
@@ -108,14 +87,10 @@ def generate_pythagorean_question():
 
 # Generate a Multiplication Challenge question
 def generate_multiplication_question():
-    # Generate two random numbers between 1 and 10
     num1 = random.randint(1, 10)
     num2 = random.randint(1, 10)
-
-    # Get user's answer
-    response = int(input(f"What is the product of {num1} and {num2}? "))
-
-    # Check user's answer
+    response = num_check(f"What is the product of {num1} and {num2}? ",
+                         "<error> Please enter a valid number.", int)
     if response == num1 * num2:
         print("You got it right! +5 points")
         return 5
@@ -126,23 +101,15 @@ def generate_multiplication_question():
 
 # Generate a Square Numbers Challenge question
 def generate_square_number_question():
-    # Generate a random number between 1 and 10
     num = random.randint(1, 10)
-
-    # Get user's answer
-    response = input(f"Is {num} a perfect square? (yes/no) ").lower()
-
-    # Check user's answer
-    if response == "yes" and int(num ** 0.5) ** 2 == num:
-        print("You got it right! +5 points")
-        return 5
-    elif response == "no" and int(num ** 0.5) ** 2 != num:
+    response = yes_no(f"Is {num} a perfect square? (yes/no) ")
+    if (response == "yes" and int(num ** 0.5) ** 2 == num) or (response == "no" and int(num ** 0.5) ** 2 != num):
         print("You got it right! +5 points")
         return 5
     else:
         print("You got it wrong. -5 points")
         return -5
- 
+
 
 # Function to generate a formatted statement
 def statement_generator(statement, deco_line, deco_char):
@@ -159,7 +126,6 @@ def colored_question(question):
 
 
 # Main code
-
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
 print("\033[103;33;60m Hello \n")
 
@@ -167,10 +133,11 @@ points = 0
 another_question = "yes"
 
 while another_question == "yes":
-    # Select question type
+    if yes_no("Would you like to read/see the instructions? ") == "yes":
+        instructions()
+
     question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions: ")
 
-    # Call the respective question function based on the selected type
     if question_type == "p":
         points += generate_pythagorean_question()
     elif question_type == "m":
@@ -182,14 +149,8 @@ while another_question == "yes":
         points += generate_multiplication_question()
         points += generate_square_number_question()
 
-    # Ask if the user wants another question
-        print()
-    another_question = yes_no("Would you like anotherquestion? ")
-    if another_question == "yes":
-        print()
-        continue
-    else:
-        another_question = "no"
+    another_question = yes_no("Would you like another question? ")
+    print()
 
 print(f"Your total score is {points} points")
 print("\033[1;35;40m \n")
