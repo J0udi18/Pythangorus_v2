@@ -74,43 +74,25 @@ def yes_no(question):
 
 
 # Definition that generates questions randomly and will call this function
-def question(symbol, points_val):
+def question(points_val):
     valid = False
     while not valid:
+        # Generate random integer for n
+        n = random.randint(1, 10)
 
-        # Question error if they input unexpected values
-        q_error = "Please enter an integer between 0 - 1000 (dont be stupid)"
+        # Calculate the values of a and b based on n
+        a = 2 * n + 1
+        b = n * (2 * n + 1) + n
 
-        # Generate random integer
-        temp_int = random.randint(1, 10)
-        int_i = random.randint(1, 10)
-        int_ii = temp_int * int_i
-
-        # Get answer and there answer to the question
-        ans = eval(str(int_ii) + symbol + str(int_i))
-        response = num_check("{} {} {} = ".format(int_ii, symbol, int_i), q_error, int, "xxx", -1, 1001)
+        # Get user's answer
+        response = num_check("In a Pythagorean triple, if n = {}, what is the length of the hypotenuse "
+                             "if the other two sides are {} and {}? ".format(n, a, b),
+                             "<error> please enter a number", float)
 
         # If user quits
         if response == "xxx":
             print("You quit")
             result = "quit"
-            return result
-
-        # check if user got answer correct
-        if response == ans and time.time() - start < seconds:
-            statement_generator("You got it right! +{} points".format(points_val), "*", "~")
-            result = "correct"
-            print()
-            return result
-        elif response != ans:
-            statement_generator("You got it wrong. -10 points", "|", "-") 
-            result = "incorrect"
-            print()
-            return result
-        else:
-            statement_generator("Time ran out no points", "|", "-")
-            result = "quit"
-            print()
             return result
 
 

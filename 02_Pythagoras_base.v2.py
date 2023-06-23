@@ -67,7 +67,8 @@ def question_checker(question):
         if response in valid_responses:
             return response
         else:
-            print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
+            print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
+                  "questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
 
 
 # Generate a Pythagorean triple question
@@ -75,7 +76,8 @@ def generate_pythagorean_question():
     n = random.randint(1, 10)
     a = 2 * n + 1
     b = n * (2 * n + 1) + n
-    response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? ",
+    response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two "
+                         f"sides are {a} and {b}? ",
                          "<error> Please enter a valid number.", int)
     if response == a**2 + b**2:
         print("You got it right! +10 points")
@@ -126,8 +128,9 @@ def colored_question(question):
 
 
 # Main code
+colored = "\033[1;33;40m \n"
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
-print("\033[103;33;60m Hello \n")
+
 
 points = 0
 another_question = "yes"
@@ -136,7 +139,9 @@ while another_question == "yes":
     if yes_no("Would you like to read/see the instructions? ") == "yes":
         instructions()
 
-    question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions: ")
+    question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
+                                     "questions, 's' for Square Numbers Challenge questions, or press <enter> for all"
+                                     " types of questions: ")
 
     if question_type == "p":
         points += generate_pythagorean_question()

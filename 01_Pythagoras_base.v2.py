@@ -9,7 +9,8 @@ def question_checker(question):
         if response in valid_responses:
             return response
         else:
-            print("<error> Please enter 'p' to generate a Pythagorean triple or press <enter> for all types of questions.")
+            print("<error> Please enter 'p' to generate a Pythagorean triple or press <enter> for all types of "
+                  "questions.")
 
 
 # Number checker to ensure correct user input
@@ -110,7 +111,8 @@ points = 0
 another_question = "yes"
 
 while another_question == "yes":
-    question_type = question_checker("Enter 'p' to generate a Pythagorean triple or press <enter> for all types of questions: ")
+    question_type = question_checker("Enter 'p' to generate a Pythagorean triple or press <enter> for all types of "
+                                     "questions: ")
     if question_type == "p" or question_type == "":
         result = generate_question(10)
         print("\033[1;32;40m \n")
