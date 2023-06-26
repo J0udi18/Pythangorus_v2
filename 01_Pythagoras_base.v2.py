@@ -73,7 +73,6 @@ def generate_question(points_val):
             print("You quit")
             return "quit"
 
-        if abs(response - (a**2 + b**2) ** 0.5) <= 0.001:
             print("\033[1;32;40m \n")
             statement_generator("You got it right! +{} points".format(points_val), "*", "~")
             return "correct"

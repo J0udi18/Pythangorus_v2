@@ -5,7 +5,7 @@ import random
 
 # Function will print instructions when called
 def instructions():
-    print("\033[1;33;40m \n")
+    print("\033[103;33;60m \n")
     statement_generator("Instructions", "|", "-")
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
@@ -36,6 +36,7 @@ def yes_no(question):
             print()
 
 
+print("\033[1;33;60m \n")
 want_instructions = yes_no("would you like to read/see the instructions? ")
 if want_instructions == "yes":
     instructions()
@@ -165,9 +166,8 @@ def colored_question(question):
 
 
 # Main code
-print("\033[1;33;40m \n")
+print("\033[103;33;60m \n")
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
-
 
 points = 0
 another_question = "yes"

@@ -1,4 +1,6 @@
 import random
+from termcolor import termcolor
+termcolor
 
 
 # Function will print instructions when called
@@ -79,10 +81,12 @@ def generate_pythagorean_question():
     response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two "
                          f"sides are {a} and {b}? ",
                          "<error> Please enter a valid number.", int)
-    if response == a**2 + b**2:
+    if response == a ** 2 + b ** 2:
+        print("\033[1;32;40m \n")
         print("You got it right! +10 points")
         return 10
     else:
+        print("\033[1;31;40m \n")
         print("You got it wrong. -10 points")
         return -10
 
@@ -94,9 +98,11 @@ def generate_multiplication_question():
     response = num_check(f"What is the product of {num1} and {num2}? ",
                          "<error> Please enter a valid number.", int)
     if response == num1 * num2:
+        print("\033[1;32;40m \n")
         print("You got it right! +5 points")
         return 5
     else:
+        print("\033[1;31;40m \n")
         print("You got it wrong. -5 points")
         return -5
 
@@ -106,9 +112,11 @@ def generate_square_number_question():
     num = random.randint(1, 10)
     response = yes_no(f"Is {num} a perfect square? (yes/no) ")
     if (response == "yes" and int(num ** 0.5) ** 2 == num) or (response == "no" and int(num ** 0.5) ** 2 != num):
+        print("\033[1;32;40m \n")
         print("You got it right! +5 points")
         return 5
     else:
+        print("\033[1;31;40m \n")
         print("You got it wrong. -5 points")
         return -5
 
@@ -130,7 +138,6 @@ def colored_question(question):
 # Main code
 colored = "\033[1;33;40m \n"
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
-
 
 points = 0
 another_question = "yes"

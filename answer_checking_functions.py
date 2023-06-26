@@ -1,5 +1,8 @@
 import random
 
+from Tools.demo.beer import n
+
+
 # Functions go here
 
 # Checks which questions user would like to answer
@@ -7,9 +10,12 @@ def question_checker(question):
     valid_responses = ["p", "m", "s", ""]
     response = input(question).lower()
     while response not in valid_responses:
-        print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
+        print(
+            "<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, "
+            "'s' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
         response = input(question).lower()
     return response
+
 
 # Generate a Pythagorean triple question
 def generate_pythagorean_question():
@@ -22,9 +28,11 @@ def generate_pythagorean_question():
 
     return a, b
 
+
 # Check if the answer for a Pythagorean triple question is correct
 def check_pythagorean_answer(a, b, response):
-    return response == (a**2 + b**2)
+    return response == (a ** 2 + b ** 2)
+
 
 # Generate a Multiplication Challenge question
 def generate_multiplication_question():
@@ -34,9 +42,11 @@ def generate_multiplication_question():
 
     return num1, num2
 
+
 # Check if the answer for a Multiplication Challenge question is correct
 def check_multiplication_answer(num1, num2, response):
     return response == num1 * num2
+
 
 # Generate a Square Numbers Challenge question
 def generate_square_number_question():
@@ -45,9 +55,11 @@ def generate_square_number_question():
 
     return num
 
+
 # Check if the answer for a Square Numbers Challenge question is correct
 def check_square_number_answer(num, response):
     return response == (int(num ** 0.5) ** 2)
+
 
 # Main code
 
@@ -57,12 +69,15 @@ another_question = "yes"
 
 while another_question == "yes":
     # Select question type
-    question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions: ")
+    question_type = question_checker(
+        "Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square "
+        "Numbers Challenge questions, or press <enter> for all types of questions: ")
 
     # Call the respective question function based on the selected type
     if question_type == "p":
         a, b = generate_pythagorean_question()
-        response = int(input(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? "))
+        response = int(input(
+            f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? "))
         if check_pythagorean_answer(a, b, response):
             print("You got it right! +10 points")
             points += 10
@@ -93,7 +108,9 @@ while another_question == "yes":
         num1, num2 = generate_multiplication_question()
         num = generate_square_number_question()
 
-        response1 = int(input(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two sides are {a} and {b}? "))
+        response1 = int(input(
+            f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if"
+            f" the other two sides are {a} and {b}? "))
         if check_pythagorean_answer(a, b, response1):
             print("You got it right! +10 points")
             points += 10
