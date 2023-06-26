@@ -1,5 +1,6 @@
 import random
 from termcolor import termcolor
+
 termcolor
 
 
@@ -17,11 +18,18 @@ def instructions():
 
 # Checks for yes or no responses
 def yes_no(question):
-    valid_responses = ["yes", "no", "y", "n"]
-    while True:
+    valid = False
+    while not valid:
         response = input(question).lower()
-        if response in valid_responses:
+
+        if response == "yes" or response == "y":
+            response = "yes"
             return response
+
+        elif response == "no" or response == "n":
+            response = "no"
+            return response
+
         else:
             print("<error> Please say yes or no")
             print()
@@ -29,16 +37,19 @@ def yes_no(question):
 
 # Number checker to make sure user inputs correctly
 def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
-    while True:
+    valid = False
+    while not valid:
         try:
+            # Checks if user inputs exit code
             response = input(question)
             if response == exit_code:
                 return response
             else:
                 response = num_type(response)
 
+            # Checks if they inputted correct number
             if low is not None and high is not None:
-                if low <= response <= high:
+                if low < response < high:
                     return response
                 else:
                     print(error)
@@ -46,7 +57,7 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
                     continue
 
             elif low is not None:
-                if response >= low:
+                if response > low:
                     return response
                 else:
                     print(error)
@@ -63,6 +74,10 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
 
 # Checks which questions user would like to answer
 def question_checker(question):
+    # 'p' is for pythagorean triple questions
+    # 'm' is for multiplication questions
+    # 's' is for square number questions
+    # set list  of the type of questions
     valid_responses = ["p", "m", "s", ""]
     while True:
         response = input(question).lower()
@@ -75,6 +90,8 @@ def question_checker(question):
 
 # Generate a Pythagorean triple question
 def generate_pythagorean_question():
+    # This will generate a pythagorean questions
+    # The other sides of the hypotenuse
     n = random.randint(1, 10)
     a = 2 * n + 1
     b = n * (2 * n + 1) + n
@@ -136,7 +153,8 @@ def colored_question(question):
 
 
 # Main code
-colored = "\033[1;33;40m \n"
+colored = "\033[103;33;30m Does this work? \n"
+print(colored)
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
 
 points = 0

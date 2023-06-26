@@ -84,7 +84,8 @@ another_question = "yes"
 while another_question == "yes":
     # Select question type
     question_type = question_checker(
-        "Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions: ")
+        "Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge questions, 's' for Square "
+        "Numbers Challenge questions, or press <enter> for all types of questions: ")
 
     # Call the respective question function based on the selected type
     if question_type == "p":

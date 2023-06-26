@@ -25,10 +25,9 @@ def instructions():
 
 
 # Main Routine goes here...
-played_before = yes_no("Have you played the "
-                       "game before? ")
+another_question = yes_no("did you know about this quiz before? ")
 
-if played_before == "no":
+if another_question == "no":
     print("display")
 
 print("program continues")
