@@ -146,6 +146,9 @@ while another_question == "yes":
     if yes_no("Would you like to read/see the instructions? ") == "yes":
         instructions()
 
+    num_of_questions = num_check("How many questions would you like to answer? ",
+                                 "<error> please enter a valid number.", int, low=1)
+
     question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
                                      "questions, 's' for Square Numbers Challenge questions, or press <enter> for all"
                                      " types of questions: ")
