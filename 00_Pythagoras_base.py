@@ -1,20 +1,20 @@
 import random
 import time
-from unittest import result
+from termcolor import colored
 
 
 # Functions go here
 
-
 # Function will print instructions when called
 def instructions():
-    statement_generator("Instructions", "|", "-")
+    print(colored("\nInstructions", "yellow"))
     print("Welcome to the Pythagoras Quiz!")
-    print("you will be given question about right triangles, and you need to find"
-          "the length of the missing side.")
-    print("let's start")
-    print("Good luck!")
-    return ""
+    print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
+    print("Your task is to determine the length of the hypotenuse.")
+    print("Each correct answer will earn you a certain number of points.")
+    print("Each incorrect answer will deduct 10 points.")
+    print("Let's get started!")
+    print("Good Luck!\n")
 
 
 # Number checker to make sure user inputs correctly
@@ -69,25 +69,25 @@ def yes_no(question):
             return response
 
         else:
-            print("<error> Please say yes / no")
+            print("<error> Please say yes/no")
             print()
 
 
 # Definition that generates questions randomly and will call this function
-def question(points_val):
-    valid = False
-    while not valid:
-        # Generate random integer for n
-        n = random.randint(1, 10)
-
-        # Calculate the values of a and b based on n
-        a = 2 * n + 1
-        b = n * (2 * n + 1) + n
-
-        # Get user's answer
-        response = num_check("In a Pythagorean triple, if n = {}, what is the length of the hypotenuse "
-                             "if the other two sides are {} and {}? ".format(n, a, b),
-                             "<error> please enter a number", float)
+# Checks which questions user would like to choose
+def question_checker(question):
+    # 'p' is for pythagorean triple questions
+    # 'm' is for multiplication questions
+    # 's' is for square number questions
+    # set list of the type of questions
+    valid_responses = ["p", "m", "s", ""]
+    while True:
+        response = input(question).lower()
+        if response in valid_responses:
+            return response
+        else:
+            print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
+                  "questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
 
         # If user quits
         if response == "xxx":
@@ -96,152 +96,86 @@ def question(points_val):
             return result
 
 
-# Gives statements decoration on sides and top
-def statement_generator(statement, side_decoration, top_bottom_decoration):
-    sides = side_decoration * 3
+def generate_question(question_type):
+    if question_type == "p":
+        # Generate a Pythagorean triple question
+        n = random.randint(1, 10)
+        a = 2 * n + 1
+        b = n * (2 * n + 1) + n
+        response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other "
+                             f"two sides are {a} and {b}? ",
+                             "<error> Please enter a valid number.", int)
+        correct_answer = a ** 2 + b ** 2
+    elif question_type == "m":
+        # Generate a Multiplication Challenge question
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        response = num_check(f"What is the product of {num1} and {num2}? ",
+                             "<error> Please enter a valid number.", int)
+        correct_answer = num1 * num2
+    elif question_type == "s":
+        # Generate a Square Numbers Challenge question
+        num = random.randint(1, 10)
+        response = num_check(f"What is the square of {num}? ",
+                             "<error> Please enter a valid number.", int)
+        correct_answer = num ** 2
 
-    statement = "{} {} {}".format(sides, statement, sides)
-
-    top_bottom = top_bottom_decoration * len(statement)
-
-    print(top_bottom)
-    print(statement)
-    print(top_bottom)
-
-    return ""
+    return response, correct_answer
 
 
-# Timer function stalls program and counts down
-def timer(t):
-    print("00 : {}".format(t))
+# Main code goes here
 
-    while t != 0:
-        t -= 1
-        time.sleep(1)
-        print("00 : {}".format(t))
-
-
-# Reset variables
-questions_answered = 0
-correct_questions = 0
-incorrect_questions = 0
-points = 0
-
-# Main routine
-print("\033[1;33;40m \n")
-statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
-
-# define the saved points
-save_points = 0
-
-# Asks if user has played before
-# If no print instructions
-played_before = yes_no("did you know about this quiz before? ")
-if played_before == "no":
-    instructions()
+print(colored("Welcome to the Pythagoras Quiz!", "green"))
 print()
-print("Enjoy!")
+print(colored)
 
-# Main quiz code
-play_again = "yes"
-while play_again == "yes":
+# Show instructions
+instructions()
 
-    # Reset variables
-    questions_answered = 0
-    correct_questions = 0
-    incorrect_questions = 0
-    points = 0
+# Ask if user wants to play
+want_to_do_quiz = yes_no("Do you want to do the quiz? (yes/no): ")
+if want_to_do_quiz == "no":
+    print("Okay, maybe next time!")
+    exit()
 
-    # Ask user for number of questions
-    num_questions_error = "<error> enter an integer"
-    num_questions = num_check("How many questions? ", num_questions_error, int, None, 0)
+# Ask which type of questions the user wants
+question_type = question_checker("What type of questions would you like to choose? (p/m/s): ")
 
-    # Ask user if they want a timer
-    time_set = yes_no("Would you like a timer? ")
+# Set the number of questions
+num_questions = num_check("How many questions would you like to answer? (1-10): ",
+                          "<error> Please enter a number between 1 and 10.", int, low=1, high=10)
 
-    if time_set == "yes":
-        # Ask user for the amount of time they get for the questions
-        seconds = num_check("how many seconds? ", "enter an number between 1, 59", int, None, 0, 60)
-        print("Timer set! ")
-        # Set start
-        start = time.time()
+# Set the point values
+correct_points = 10
+incorrect_points = -10
 
-    # No timer
+# Initialize variables
+total_score = 0
+correct_count = 0
+incorrect_count = 0
+
+# Generate and ask questions
+for i in range(num_questions):
+    print(f"\nQuestion {i + 1}:")
+    response, correct_answer = generate_question(question_type)
+
+    if response == "quit":
+        break
+
+    # Check if the response is correct
+    if response == correct_answer:
+        print("Correct!")
+        total_score += correct_points
+        correct_count += 1
     else:
-        start = time.time() * 10000
-        seconds = 1
+        print(f"Incorrect! The correct answer is {correct_answer}.")
+        total_score += incorrect_points
+        incorrect_count += 1
 
-    # Generate questions
-    while time.time() - start < seconds and num_questions > 0:
+    time.sleep(1)  # Add a delay before showing the next question
 
-        # Add number of correct and incorrect questions
-        if result == "correct":
-            correct_questions += 1
-            points += num_points
-        elif result == "incorrect":
-            incorrect_questions += 1
-            points -= 10
-        else:
-            questions_answered -= 1
-            break
-
-        # Add number of questions answered
-        questions_answered += 1
-
-        # number of questions left go down
-        num_questions -= 1
-
-    print(questions_answered)
-    print(correct_questions)
-    print(incorrect_questions)
-
-    # **** Calculate Game Stats ****
-    percent_correct = correct_questions / questions_answered * 100
-    percent_incorrect = incorrect_questions / questions_answered * 100
-
-    # Displays game stats with % values to the nearest whole number
-    print()
-    statement_generator("Quiz Statistics", "-", "*")
-    print("Correct: {}: ({:.0f}%)\nIncorrect: {}: ({:.0f}%)".format(correct_questions, percent_correct,
-                                                                    incorrect_questions, percent_incorrect))
-    print()
-
-    # Print and figure out new high score 
-    if points > save_points:
-        print("NEW HIGH SCORE")
-        save_points = points
-    else:
-        print("Nice Job!")
-    print("Total points: ", points)
-    print()
-
-    # Asks user if they want to see there history
-    show_history = yes_no("would you like to see quiz history? ")
-
-    # displays history if user says yes
-    if show_history == "yes":
-        print()
-        statement_generator("Quiz History", "-", "*")
-        for quiz in question:
-            print(quiz)
-
-        print()
-        statement_generator("Thanks for doing the quiz", "!", "=")
-
-    # Doesn't display history if user says no
-    elif show_history == "no":
-        print()
-        statement_generator("Thank you for doing the quiz", "!", "=")
-
-    # Ask user if they want to play again
-    print()
-    redo = yes_no("Would you like to play again? ")
-    if redo == "yes":
-        print()
-        continue
-    else:
-        redo = "no"
-
-print("\033[255;20;147m \n")
-print("\033[255;20;147m Thanks for doing the quiz  \n")
-255 - 20 - 147
+# Print final score and statistics
+print("\nQuiz Finished!")
+print(f"Total Score: {total_score}")
+print(f"Number of Correct Answers: {correct_count}")
+print(f"Number of Incorrect Answers: {incorrect_count}")

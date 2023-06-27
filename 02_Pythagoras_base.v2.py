@@ -88,54 +88,38 @@ def question_checker(question):
                   "questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
 
 
-# Generate a Pythagorean triple question
-def generate_pythagorean_question():
-    # This will generate a pythagorean questions
-    # The other sides of the hypotenuse
-    n = random.randint(1, 10)
-    a = 2 * n + 1
-    b = n * (2 * n + 1) + n
-    response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other two "
-                         f"sides are {a} and {b}? ",
-                         "<error> Please enter a valid number.", int)
-    if response == a ** 2 + b ** 2:
+def generate_question(question_type):
+    if question_type == "p":
+        # Generate a Pythagorean triple question
+        n = random.randint(1, 10)
+        a = 2 * n + 1
+        b = n * (2 * n + 1) + n
+        response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other "
+                             f"two"
+                             f"sides are {a} and {b}? ",
+                             "<error> Please enter a valid number.", int)
+        correct_answer = a ** 2 + b ** 2
+    elif question_type == "m":
+        # Generate a Multiplication Challenge question
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        response = num_check(f"What is the product of {num1} and {num2}? ",
+                             "<error> Please enter a valid number.", int)
+        correct_answer = num1 * num2
+    elif question_type == "s":
+        # Generate a Square Numbers Challenge question
+        num = random.randint(1, 10)
+        response = yes_no(f"Is {num} a perfect square? (yes/no) ")
+        correct_answer = (int(num ** 0.5) ** 2 == num)
+
+    if response == correct_answer:
         print("\033[1;32;40m \n")
-        print("You got it right! +10 points")
-        return 10
+        print("You got it right! +10 points" if question_type == "p" else "You got it right! +5 points")
+        return 10 if question_type == "p" else 5
     else:
         print("\033[1;31;40m \n")
-        print("You got it wrong. -10 points")
-        return -10
-
-
-# Generate a Multiplication Challenge question
-def generate_multiplication_question():
-    num1 = random.randint(1, 10)
-    num2 = random.randint(1, 10)
-    response = num_check(f"What is the product of {num1} and {num2}? ",
-                         "<error> Please enter a valid number.", int)
-    if response == num1 * num2:
-        print("\033[1;32;40m \n")
-        print("You got it right! +5 points")
-        return 5
-    else:
-        print("\033[1;31;40m \n")
-        print("You got it wrong. -5 points")
-        return -5
-
-
-# Generate a Square Numbers Challenge question
-def generate_square_number_question():
-    num = random.randint(1, 10)
-    response = yes_no(f"Is {num} a perfect square? (yes/no) ")
-    if (response == "yes" and int(num ** 0.5) ** 2 == num) or (response == "no" and int(num ** 0.5) ** 2 != num):
-        print("\033[1;32;40m \n")
-        print("You got it right! +5 points")
-        return 5
-    else:
-        print("\033[1;31;40m \n")
-        print("You got it wrong. -5 points")
-        return -5
+        print("You got it wrong. -10 points" if question_type == "p" else "You got it wrong. -5 points")
+        return -10 if question_type == "p" else -5
 
 
 # Function to generate a formatted statement
@@ -153,7 +137,7 @@ def colored_question(question):
 
 
 # Main code
-colored = "\033[103;33;30m Does this work? \n"
+colored = "\033[103;33;30m Welcome \n"
 print(colored)
 statement_generator("Welcome to Joudi's Math Quiz", "!", "=")
 
@@ -170,17 +154,6 @@ while another_question == "yes":
     question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
                                      "questions, 's' for Square Numbers Challenge questions, or press <enter> for all"
                                      " types of questions: ")
-
-    if question_type == "p":
-        points += generate_pythagorean_question()
-    elif question_type == "m":
-        points += generate_multiplication_question()
-    elif question_type == "s":
-        points += generate_square_number_question()
-    else:
-        points += generate_pythagorean_question()
-        points += generate_multiplication_question()
-        points += generate_square_number_question()
 
     another_question = yes_no("Would you like another question? ")
     print()
