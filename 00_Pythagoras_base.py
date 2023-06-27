@@ -1,13 +1,13 @@
 import random
 import time
-from termcolor import colored
 
 
 # Functions go here
 
 # Function will print instructions when called
 def instructions():
-    print(colored("\nInstructions", "yellow"))
+    print("\033[103;33;30m \n")
+    print("\nInstructions")
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
     print("Your task is to determine the length of the hypotenuse.")
@@ -18,7 +18,7 @@ def instructions():
 
 
 # Number checker to make sure user inputs correctly
-def num_check(question, error, num_type, exit_code=None, low=None, high=None):
+def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
     valid = False
     while not valid:
         try:
@@ -86,6 +86,7 @@ def question_checker(question):
         if response in valid_responses:
             return response
         else:
+            print("\033[1;31;40m \n")
             print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
                   "questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
 
@@ -124,15 +125,21 @@ def generate_question(question_type):
 
 
 # Main code goes here
+# it should print yellow code
+print("\033[103;33;30m \n")
+print("Welcome to the Pythagoras Quiz!")
 
-print(colored("Welcome to the Pythagoras Quiz!", "green"))
-print()
-print(colored)
 
-# Show instructions
-instructions()
+# Ask if it wants to see instructions
+want_instructions = yes_no("Do you want to see the instructions? (yes/no): ")
+if want_instructions == "yes":
+    # Show instructions
+    instructions()
+
 
 # Ask if user wants to play
+# it should print it white gray
+print("\033[1;37;40m \n")
 want_to_do_quiz = yes_no("Do you want to do the quiz? (yes/no): ")
 if want_to_do_quiz == "no":
     print("Okay, maybe next time!")
@@ -142,20 +149,26 @@ if want_to_do_quiz == "no":
 question_type = question_checker("What type of questions would you like to choose? (p/m/s): ")
 
 # Set the number of questions
+print("\033[1;37;40m \n")
 num_questions = num_check("How many questions would you like to answer? (1-10): ",
                           "<error> Please enter a number between 1 and 10.", int, low=1, high=10)
 
 # Set the point values
+print("\033[1;32;40m \n")
 correct_points = 10
+print("\033[1;31;40m \n")
 incorrect_points = -10
 
 # Initialize variables
 total_score = 0
+print("\033[1;32;40m \n")
 correct_count = 0
+print("\033[1;31;40m \n")
 incorrect_count = 0
 
 # Generate and ask questions
 for i in range(num_questions):
+    print("\033[1;37;40m \n")
     print(f"\nQuestion {i + 1}:")
     response, correct_answer = generate_question(question_type)
 
@@ -164,10 +177,12 @@ for i in range(num_questions):
 
     # Check if the response is correct
     if response == correct_answer:
+        print("\033[1;32;40m \n")
         print("Correct!")
         total_score += correct_points
         correct_count += 1
     else:
+        print("\033[1;31;40m \n")
         print(f"Incorrect! The correct answer is {correct_answer}.")
         total_score += incorrect_points
         incorrect_count += 1
@@ -177,5 +192,9 @@ for i in range(num_questions):
 # Print final score and statistics
 print("\nQuiz Finished!")
 print(f"Total Score: {total_score}")
+print("\033[1;32;40m \n")
 print(f"Number of Correct Answers: {correct_count}")
+print("\033[1;31;40m \n")
 print(f"Number of Incorrect Answers: {incorrect_count}")
+print("\033[1;35;40m \n")
+print("Thank you for doing the quiz!")

@@ -145,7 +145,7 @@ points = 0
 another_question = "yes"
 
 while another_question == "yes":
-    if yes_no("Would you like to read/see the instructions? ") == "yes":
+    if yes_no("Would you like to see instruction? ") == "yes":
         instructions()
 
     num_of_questions = num_check("How many questions would you like to answer? ",
@@ -154,9 +154,6 @@ while another_question == "yes":
     question_type = question_checker("Enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
                                      "questions, 's' for Square Numbers Challenge questions, or press <enter> for all"
                                      " types of questions: ")
-
-    another_question = yes_no("Would you like another question? ")
-    print()
 
 print(f"Your total score is {points} points")
 print("\033[1;35;40m \n")
