@@ -6,8 +6,8 @@ import time
 
 # Function will print instructions when called
 def instructions():
-    print("\033[103;33;30m \n")
-    print("\nInstructions")
+    statement_generator("\033[103;33;30m \n")
+    print("Instructions", "|", "-")
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
     print("Your task is to determine the length of the hypotenuse.")
@@ -15,6 +15,21 @@ def instructions():
     print("Each incorrect answer will deduct 10 points.")
     print("Let's get started!")
     print("Good Luck!\n")
+
+
+# Gives statements decoration on sides and top
+def statement_generator(statement, side_decoration, top_bottom_decoration):
+    sides = side_decoration * 3
+
+    statement = "{} {} {}".format(sides, statement, sides)
+
+    top_bottom = top_bottom_decoration * len(statement)
+
+    print(top_bottom)
+    print(statement)
+    print(top_bottom)
+
+    return ""
 
 
 # Number checker to make sure user inputs correctly
@@ -127,15 +142,13 @@ def generate_question(question_type):
 # Main code goes here
 # it should print yellow code
 print("\033[103;33;30m \n")
-print("Welcome to the Pythagoras Quiz!")
-
+statement_generator("Welcome to the Pythagoras Quiz", "!", "=")
 
 # Ask if it wants to see instructions
 want_instructions = yes_no("Do you want to see the instructions? (yes/no): ")
 if want_instructions == "yes":
     # Show instructions
     instructions()
-
 
 # Ask if user wants to play
 # it should print it white gray
