@@ -6,8 +6,8 @@ import time
 
 # Function will print instructions when called
 def instructions():
-    statement_generator("\033[103;33;30m \n")
-    print("Instructions", "|", "-")
+    print("\033[103;33;30m \n")
+    statement_generator("Instructions", "|", "-")
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
     print("Your task is to determine the length of the hypotenuse.")
@@ -210,4 +210,4 @@ print(f"Number of Correct Answers: {correct_count}")
 print("\033[1;31;40m \n")
 print(f"Number of Incorrect Answers: {incorrect_count}")
 print("\033[1;35;40m \n")
-print("Thank you for doing the quiz!")
+statement_generator("Thank you for doing the quiz!", "*", "*")
