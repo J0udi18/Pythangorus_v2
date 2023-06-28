@@ -1,3 +1,4 @@
+import math
 import random
 import time
 
@@ -11,6 +12,7 @@ def instructions():
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
     print("Your task is to determine the length of the hypotenuse.")
+    print(" when choosing question type press <enter> if you want all types")
     print("Each correct answer will earn you a certain number of points.")
     print("Each incorrect answer will deduct 10 points.")
     print("Let's get started!")
@@ -38,31 +40,34 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
     while not valid:
         try:
             # Checks if user inputs exit code
-            response = input(question)
-            if response == exit_code:
-                return response
-            else:
-                response = num_type(response)
+            responses = input(question)
+            if responses == exit_code:
+                return responses
+            elif responses == "":
+                print("No input detected. Using default value.")
+                return 3  # Set a default value here
+
+            responses = num_type(responses)
 
             # Checks if they inputted correct number
             if low is not None and high is not None:
-                if low < response < high:
-                    return response
+                if low < responses < high:
+                    return responses
                 else:
                     print(error)
                     print()
                     continue
 
             elif low is not None:
-                if response > low:
-                    return response
+                if responses > low:
+                    return responses
                 else:
                     print(error)
                     print()
                     continue
 
             else:
-                return response
+                return responses
 
         except ValueError:
             print(error)
@@ -73,15 +78,15 @@ def num_check(question, error, num_type, exit_code="xxx", low=None, high=None):
 def yes_no(question):
     valid = False
     while not valid:
-        response = input(question).lower()
+        responses = input(question).lower()
 
-        if response == "yes" or response == "y":
-            response = "yes"
-            return response
+        if responses == "yes" or responses == "y":
+            responses = "yes"
+            return responses
 
-        elif response == "no" or response == "n":
-            response = "no"
-            return response
+        elif responses == "no" or responses == "n":
+            responses = "no"
+            return responses
 
         else:
             print("<error> Please say yes/no")
@@ -97,13 +102,14 @@ def question_checker(question):
     # set list of the type of questions
     valid_responses = ["p", "m", "s", ""]
     while True:
-        response = input(question).lower()
-        if response in valid_responses:
-            return response
+        responses = input(question).lower()
+        if responses in valid_responses:
+            return responses
         else:
             print("\033[1;31;40m \n")
             print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
                   "questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
+            print()
 
         # If user quits
         if response == "xxx":
@@ -113,30 +119,33 @@ def question_checker(question):
 
 
 def generate_question(question_type):
+    responses = None  # Default value for responses
+
     if question_type == "p":
         # Generate a Pythagorean triple question
         n = random.randint(1, 10)
         a = 2 * n + 1
         b = n * (2 * n + 1) + n
-        response = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other "
-                             f"two sides are {a} and {b}? ",
-                             "<error> Please enter a valid number.", int)
-        correct_answer = a ** 2 + b ** 2
+        responses = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other "
+                              f"two sides are {a} and {b}? ",
+                              "<error> Please enter a valid number.", int)
+        correct_answers = round(math.sqrt(a ** 2 + b ** 2))
+        correct_answer_text = f"√({a}^2 + {b}^2)"
     elif question_type == "m":
         # Generate a Multiplication Challenge question
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 10)
-        response = num_check(f"What is the product of {num1} and {num2}? ",
-                             "<error> Please enter a valid number.", int)
-        correct_answer = num1 * num2
+        responses = num_check(f"What is the product of {num1} and {num2}? ",
+                              "<error> Please enter a valid number.", int)
+        correct_answers = num1 * num2
     elif question_type == "s":
         # Generate a Square Numbers Challenge question
         num = random.randint(1, 10)
-        response = num_check(f"What is the square of {num}? ",
-                             "<error> Please enter a valid number.", int)
-        correct_answer = num ** 2
+        responses = num_check(f"What is the square of {num}? ",
+                              "<error> Please enter a valid number.", int)
+        correct_answers = num ** 2
 
-    return response, correct_answer
+    return responses, correct_answers
 
 
 # Main code goes here

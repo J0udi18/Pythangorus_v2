@@ -1,5 +1,6 @@
 import random
 
+
 # Define a function to ask a Pythagoras question and get a yes/no response from the user
 def ask_question():
     # Generate random values for the legs and hypotenuse
@@ -21,9 +22,11 @@ def ask_question():
         print("❌ Incorrect. ❌")
         return 0
 
+
 # Define a function to display the student's score
 def display_score(score):
     print(f"Your score is {score} out of 10.")
+
 
 # Define a function to play the Pythagoras Quiz
 def do_quiz():
@@ -41,6 +44,7 @@ def do_quiz():
 
     # Display the student's score
     display_score(score)
+
 
 # Use a while loop to allow the user to do the Pythagoras Quiz multiple times
 another_question = "yes"
