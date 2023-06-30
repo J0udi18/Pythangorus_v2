@@ -12,7 +12,6 @@ def instructions():
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
     print("Your task is to determine the length of the hypotenuse.")
-    print(" when choosing question type press <enter> if you want all types")
     print("Each correct answer will earn you a certain number of points.")
     print("Each incorrect answer will deduct 10 points.")
     print("Let's get started!")
@@ -105,14 +104,16 @@ def question_checker(question):
         responses = input(question).lower()
         if responses in valid_responses:
             return responses
-        else:
+        elif responses == "xxx":
+            print("you quit")
+            exit()
             print("\033[1;31;40m \n")
             print("<error> Please enter 'p' for Pythagorean triple questions, 'm' for Multiplication Challenge "
-                  "questions, 's' for Square Numbers Challenge questions, or press <enter> for all types of questions.")
+                  "questions, 's' for Square Numbers Challenge questions.")
             print()
 
         # If user quits
-        if response == "xxx":
+        if responses == "xxx":
             print("You quit")
             result = "quit"
             return result
@@ -149,6 +150,9 @@ def generate_question(question_type):
 
 
 # Main code goes here
+
+exit_code = "xxx"
+
 # it should print yellow code
 print("\033[103;33;30m \n")
 statement_generator("Welcome to the Pythagoras Quiz", "!", "=")
@@ -164,6 +168,7 @@ if want_instructions == "yes":
 print("\033[1;37;40m \n")
 want_to_do_quiz = yes_no("Do you want to do the quiz? (yes/no): ")
 if want_to_do_quiz == "no":
+    print("\033[38;5;214m \n")
     print("Okay, maybe next time!")
     exit()
 
@@ -174,6 +179,11 @@ question_type = question_checker("What type of questions would you like to choos
 print("\033[1;37;40m \n")
 num_questions = num_check("How many questions would you like to answer? (1-10): ",
                           "<error> Please enter a number between 1 and 10.", int, low=1, high=10)
+
+# Check if the user chose to quit
+if num_questions == "xxx":
+    print("You quit")
+    exit()
 
 # Set the point values
 print("\033[1;32;40m \n")
