@@ -204,7 +204,10 @@ for i in range(num_questions):
     print(f"\nQuestion {i + 1}:")
     response, correct_answer = generate_question(question_type)
 
-    if response == "quit":
+    # Check if the response is "xxx"
+    if str(response) .lower() == "xxx":
+        print("You quit")
+        total_score -= 10 # Deduct 10 point for leaving early
         break
 
     # Check if the response is correct
