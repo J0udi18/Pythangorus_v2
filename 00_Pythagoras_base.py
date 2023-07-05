@@ -88,6 +88,7 @@ def yes_no(question):
             return responses
 
         else:
+            print("\033[1;31;40m \n")
             print("<error> Please say yes/no")
             print()
 
@@ -124,12 +125,14 @@ def generate_question(question_type):
 
     if question_type == "p":
         # Generate a Pythagorean triple question
-        n = random.randint(1, 10)
-        a = 2 * n + 1
-        b = n * (2 * n + 1) + n
-        responses = num_check(f"In a Pythagorean triple, if n = {n}, what is the length of the hypotenuse if the other "
-                              f"two sides are {a} and {b}? ",
-                              "<error> Please enter a valid number.", int)
+        a = random.randint(1, 10)
+        b = random.randint(1, 10)
+        c = round(math.sqrt(a ** 2 + b ** 2))
+        responses = num_check(
+            f"In a Pythagorean triple, if the lengths of two sides are {a} and {b}, what is the length of the "
+            f"hypotenuse? ",
+            "<error> Please enter a valid number.", int)
+
         correct_answers = round(math.sqrt(a ** 2 + b ** 2))
         correct_answer_text = f"√({a}^2 + {b}^2)"
     elif question_type == "m":
@@ -209,9 +212,9 @@ for i in range(num_questions):
     response, correct_answer = generate_question(question_type)
 
     # Check if the response is "xxx"
-    if str(response) .lower() == "xxx":
+    if str(response).lower() == "xxx":
         print("You quit")
-        total_score -= 10 # Deduct 10 point for leaving early
+        total_score -= 10  # Deduct 10 point for leaving early
         break
 
     # Check if the response is correct
