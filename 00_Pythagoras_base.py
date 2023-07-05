@@ -229,11 +229,16 @@ for i in range(num_questions):
     time.sleep(1)  # Add a delay before showing the next question
 
 # Print final score and statistics
+# it should print blue code
+print("\033[1;34m \n")
 print("\nQuiz Finished!")
 print(f"Total Score: {total_score}")
+# it should print green code
 print("\033[1;32;40m \n")
 print(f"Number of Correct Answers: {correct_count}")
 print("\033[1;31;40m \n")
+# it should print red code
 print(f"Number of Incorrect Answers: {incorrect_count}")
+# it should print purple code
 print("\033[1;35;40m \n")
 statement_generator("Thank you for doing the quiz!", "*", "*")
