@@ -175,6 +175,10 @@ if want_to_do_quiz == "no":
 # Ask which type of questions the user wants
 question_type = question_checker("What type of questions would you like to choose? (p/m/s): ")
 
+# warn them about the deduction
+print("\033[38;5;214m \n")
+statement_generator("WARNING: If you left the quiz early 10 points will deduct from your total score.", "!", "!")
+
 # Set the number of questions
 print("\033[1;37;40m \n")
 num_questions = num_check("How many questions would you like to answer? (1-10): ",
