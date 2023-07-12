@@ -12,6 +12,7 @@ def instructions():
     print("Welcome to the Pythagoras Quiz!")
     print("In this quiz, you will be shown the lengths of two sides of a right triangle.")
     print("Your task is to determine the length of the hypotenuse.")
+    print("When writing your answer for 'p' please round your answer!!")
     print("Each correct answer will earn you a certain number of points.")
     print("Each incorrect answer will deduct 10 points.")
     print("Let's get started!")
